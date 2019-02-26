@@ -1,0 +1,32 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "dapps project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "child_process": "^1.0.2",
+    "client-sessions": "^0.7.0",
+    "crypto": "0.0.3",
+    "dateformat": "^2.0.0",
+    "express": "^4.14.1",
+    "fibers": "^3.0.0",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "jsdom": "^9.10.0",
+    "mongoose": "^5.4.15",
+    "nodemailer": "^2.6.4",
+    "nodemailer-smtp-transport": "^2.7.2",
+    "path": "^0.12.7",
+    "solc": "^0.4.9",
+    "sprintf-js": "^1.0.3",
+    "trycatch": "^1.5.21",
+    "wait.for": "^0.6.6",
+    "web3": "^0.18.2"
+  }
+}

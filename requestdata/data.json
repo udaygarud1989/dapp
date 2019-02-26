@@ -1,0 +1,52 @@
+{
+     "ContratcInfo":[
+		{
+      "ContractNumber": "DC124-51", 
+      "ContractDescription": "Request for Part Modification",
+      "ContractOwnedby": "Design and Engineering",
+	  "NumberofParts": "5",
+	  "ContractAmount": "500",
+	  "Duedate": "10-28-2017",
+	  "supplierid": "H-123456",
+      "suppliername": "Henry",
+	  "supplierlocation": "usa",
+	  "filehashkey" :"https://drive.google.com/open?id=0B2j2GUb2ZFH5NXRsYXl1QkhMYkk",
+	  "tasks":["Request for a modification of design counter for part KN-153473"
+	  ]
+	  
+     }
+	 ,
+	 {
+		
+      "ContractNumber": "DC124-52", 
+      "ContractDescription": "Request for Part Modification",
+      "ContractOwnedby": "Design and Engineering",
+	  "NumberofParts": "6",
+	  "ContractAmount": "600",
+	  "Duedate": "11-22-2017",
+	  "supplierid": "H-123456",
+      "suppliername": "Henry",
+	  "supplierlocation": "usa",
+	  "filehashkey" :"https://drive.google.com/open?id=0B2j2GUb2ZFH5NXRsYXl1QkhMYkk",
+	  "tasks":["Request for a modification of design counter for part KN-153473"
+	  ]
+	  },
+	   {
+		
+      "ContractNumber": "DC124-53", 
+      "ContractDescription": "Request for Part Modification",
+      "ContractOwnedby": "Design and Engineering",
+	  "NumberofParts": "7",
+	  "ContractAmount": "800",
+	  "Duedate": "10-24-2017",
+	  "supplierid": "H-123456",
+      "suppliername": "Henry",
+	  "supplierlocation": "usa",
+	  "filehashkey" :"https://drive.google.com/open?id=0B2j2GUb2ZFH5NXRsYXl1QkhMYkk",
+	  "tasks":["Request for a modification of design counter for part KN-153473"
+	  ]
+	  }
+     ]
+    
+    
+}

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!-- 
+=========================================================================================
+File description:
+    Filename    : index.html
+    Module      : Index page HTML Template
+	Description :
+			      This file contains HTML code for Login and Registration.
+	Developed By: PLM LOGIX
+=========================================================================================
+Date                       Name                    Description of Change
+December-19-2016          Nisha Mane                 Initial Version
+======================================================================================= -->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<base href="/">
+    <title>PLM-BLOCKCHAIN</title>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/spinner.css">
+    <link rel="stylesheet" href="/css/custom.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <link href="css/sweetalert.css" rel="stylesheet">
+    <script src="js/sweetalert.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.min.js"></script>
+    <script src="js/angular-cookies.min.js"></script>
+    <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="vendor/i18next/i18next.js"></script>
+    <script src="vendor/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+    <script src="vendor/i18next-sprintf-postprocessor/i18nextSprintfPostProcessor.js"></script>
+    <script src="vendor/ng-i18next.js"></script>
+    <script src="services/script.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            $("#button_1").click(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:3000/" + document.getElementById("myText").value,
+                    data: "abc",
+                    success: function(result) {
+                        // alert(JSON.stringify(result));
+                        document.getElementById("mydiv").innerHTML = "";
+                        document.getElementById("mydiv").append(JSON.stringify(result));
+                    },
+                    error: function(result) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function registerPage() {
+            $('#loginDivId').hide();
+            $('#registerDivId').show();
+        }
+        function loginPage() {
+            $('#loginDivId').show();
+            $('#registerDivId').hide();
+        }
+    </script>
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        #imageDiv {
+            background: url(images/login-sample.png);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }      
+        #loginDivId {
+            display: true;
+        }
+        #registerDivId {
+            display: none;
+        }        
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+		
+    </style>
+</head>
+
+<body class="container" data-ng-app="app" data-ng-controller="AppCtrl">
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #fff;">
+        <div class="navbar-header" style="background-color: #fff;">
+            <a href="" class="pull-left" style="margin-top: 5px; margin-left: 25px;"><img alt="" src="images/logo.png"></a> <!-- <a class="navbar-brand" style="margin-left: 10px; color: #000;" href="">PLM-BLOCKCHAIN</a> -->
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-top-links navbar-right" style="margin-top:5px;">
+                <a style="margin-right: 0px;color: #000000;text-decoration: none;">Select Language 
+				    <select class="selectpicker" style="margin-right: 60px; color: #000000; text-decoration: none;"
+						data-ng-model="model.selectedLocale"
+						data-ng-options="key as value for (key, value) in availableLocales"
+						data-ng-change="changeLng(model.selectedLocale)">
+					</select>
+				</a>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+        <!--  </div> -->
+    </nav>
+    <div class="container destination">
+        <div class="container">
+            <div class="row" style="height: 500px;">
+                <!-- <div class="col-md-14"> -->
+                <div class="col-xs-12 col-md-8">
+                    <div class="panel panel-primary" id="imageDiv" style="border-width: small; width: 98%; height: 350px; margin-top: 55px;">
+                        <div class="panel-body" style=""></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div>
+                        <div id="loginDivId" class="loginmodal-container">
+                            <h1>{{'LoginYourAccount' | i18next}}</h1>
+                            <br>
+                            <form name="loginform">
+                                <input type="text" class="form-control" name="registerEmail" data-ng-model="username" id="username" placeholder="{{'Username' | i18next}}" />
+                                <input type="password" class="form-control" name="registerPassword" data-ng-model="password" id="password" placeholder="{{'Password' | i18next}}" data-ng-keyup="$event.keyCode == 13 && login()" />
+                                <br>
+                                <input type="button" name="login" style="background-color: #5bc0de; color: #000;border: none;" class="login loginmodal-submit" data-ng-click="login()" id="login" value="{{'Login' | i18next}}" />
+                            </form>
+							<br>
+                            <div class="login-help" style="text-align:center">
+                                <a href="" style="color: #000;" id="gotoregister" onclick="registerPage()"> <b>{{'GotoRegistration' | i18next}}</b></a>
+                            </div>
+                        </div>
+                        <div id="registerDivId" class="loginmodal-container">
+                            <h1>{{'CreateYourAccount' | i18next}}</h1>
+                            <br>
+                            <form name="myform">
+                                <input type="text" class="form-control" data-ng-model="username" id="reg_username" placeholder="{{'Username' | i18next}}">
+                                <input type="text" class="form-control" data-ng-model="email" id="email" placeholder="{{'Email' | i18next}}">
+                                <input type="password" class="form-control" data-ng-model="password" id="reg_password" placeholder="{{'Password' | i18next}}">
+                                <input type="password" class="form-control" data-ng-model="confirm_password" id="confirm_password" placeholder="{{'ConfirmPassword' | i18next}}" data-ng-keyup="$event.keyCode == 13 && registerUser()">
+                                <select class="form-control" data-ng-model="role" data-ng-keyup="$event.keyCode == 13 && registerUser()">
+                                    <option value='' disabled selected style='display: none;'>{{'SelectRole' | i18next}}</option>
+                                    <option value="Main Account">Main Account</option>
+                                    <option value="Supplier">Supplier</option>
+                                </select>
+                                <br>
+                                <input type="submit" name="login" style="background-color: #5bc0de;color: #000; border: none;" class="login loginmodal-submit" data-ng-click="registerUser()" id="register" value="{{'SignUp' | i18next}}">
+                            </form>
+                            <div class="login-help" style="text-align:center">
+                                <b><a href="" style="color: #000;" id="gotologin" onclick="loginPage()">{{'GotoLogin' | i18next}}</a></b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--   </div> -->
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="mydiv"></div>
+                </div>
+            </div>
+        </div>
+        <button style="display: none" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#pageProgressBar" id="progressBtn"></button>
+        <div class="modal lang" id="pageProgressBar">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: transparent; width: 110px; border: 0px; box-shadow: none; margin-top: 250px; margin-left: 150px">
+                    <div class="spinner" style="font-size: 0.4cm;">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                        <br>Please wait.....
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer navbar-fixed-bottom" style="background-color: #4A4A4A;; height: 50px;border-top: 1px solid #000;">
+      <!--<h4 style="margin-left: 37%; color: #fff;">Developed By - Project <img src="images/adam.png" alt="Adam"></h4>-->
+      <h5 style="margin-left: 3%; color: #fff;"></h5>
+   </div>
+</body>
+</html>

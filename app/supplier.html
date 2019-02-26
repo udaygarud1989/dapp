@@ -1,0 +1,794 @@
+<!-- 
+=========================================================================================
+File description:
+    Filename    : supplier.html
+    Module      : Supplier Account HTML Template
+	Description :
+			      This file contains HTML code for Supplier Account User.
+	Developed By: PLM LOGIX
+=========================================================================================
+Date                       Name                    Description of Change
+December-19-2016          Nisha Mane                 Initial Version
+======================================================================================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<base href="/">
+    <title>PLM-BLOCKCHAIN</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/spinner.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.7.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="/js/angular.min.js" type="text/javascript"></script>
+	<script src="js/Chart.js"></script>
+    <script src="js/angular-chart.js"></script>
+    <script src="/js/clipboard.min.js" type="text/javascript"></script>
+    <link href="css/sweetalert.css" rel="stylesheet">
+    <script src="js/sweetalert.min.js" type="text/javascript"></script>
+    <script src="js/angular-cookies.min.js"></script>
+    <script src="vendor/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="vendor/i18next/i18next.js"></script>
+    <script src="vendor/i18next-xhr-backend/i18nextXHRBackend.js"></script>
+    <script src="vendor/i18next-sprintf-postprocessor/i18nextSprintfPostProcessor.js"></script>
+    <script src="vendor/ng-i18next.js"></script>
+    <script src="services/supplier.js" type="text/javascript"></script>
+    <script src="js/angular-idle.min.js" type="text/javascript"></script>
+    <script src="js/angular-cookies.min.js" type="text/javascript"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+	<script src="js/moment.js"></script>
+    <script src="js/angular-moment.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+        document.write('<base href="' + document.location + '" />');
+    </script>
+    <style>
+            .background_selected {
+            background-color : #DEEBF7;
+            }
+        </style>
+        <script>
+               
+               $(document).on('click', '.catss', function(event) {
+                event.preventDefault();
+               
+                $('.catss').parent().removeClass('background_selected');
+                $(this).parent().addClass('background_selected');
+            });
+
+            $(document).on('click', '#compcont', function(event) {
+                event.preventDefault();
+                $( "#foo" ).trigger( "click" );
+                
+                
+            });
+            
+           
+        </script>
+        <script>
+            function filter(element) {
+                var value = $(element).val().toUpperCase();
+            
+                $("#side-menu2 li").each(function () {
+                    
+                    if ($(this).text().search(value) > -1) {
+                        $(this).show();
+                        $(this).prevAll('.header').first().show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            }
+            </script>
+    <script>
+        function select_element_contents() {
+            var el = document.getElementById("tag_text");
+            var el_text = el.value;
+            var range = document.createRange();
+            range.selectNode(el);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                var successful = document.execCommand('copy');
+            } catch (err) {
+                window.prompt("Copy to clipboard: Ctrl+C/Cmd+C, Enter", el_text);
+            }
+        }
+    </script>
+</head>
+
+<body data-ng-app="app" data-ng-controller="SupplierCtrl">
+    <div class="spinner" data-ng-hide="loaded" style="font-size: 0.4cm; display: block; margin-left: auto; margin-right: auto; margin-top: 350px;">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+        <br>Please wait.....
+    </div>
+    <div id="wrapper" class="ng-cloak x-ng-cloak ng-hide" data-ng-show="loaded">
+        <div class="row" style="min-height: 25px; padding-top: 3px; padding-right: 20px; background-color: #fff !important;">
+            <div class="col-md-6"></div>
+            <div class="col-md-6">
+                <div class="nav navbar-top-links navbar-right">
+                    <ul class="nav navbar-top-links navbar-right" style="margin-top:5px;">
+                        <a style="margin-right: 0px;color: #000000;text-decoration: none;">Select Language 
+							<select class="selectpicker" style="margin-right: 60px; color: #000000; text-decoration: none;"
+								data-ng-model="model.selectedLocale"
+								data-ng-options="key as value for (key, value) in availableLocales"
+								data-ng-change="changeLng(model.selectedLocale)">
+							</select>
+						</a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0; background-color: #fff !important; border-color: #2f4050;">
+            <div class="navbar-header" style="background-color: #fff;">
+            <a href="" class="pull-left" style="margin-top: -15px; margin-left: 25px;"><img alt="" src="images/logo.png"></a> <!-- <a class="navbar-brand" style="margin-left: 10px; color: #000;" href="">PLM-BLOCKCHAIN</a> -->
+        </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+               <!--  <li style="margin-right: 10px;">
+                    <button class="btn btn-default" id="getPeersInfoBtnId" data-ng-click="getPeersInfo()" data-toggle="modal" data-target="#PeersModal">Peers ({{peercount}})
+                    </button>
+                </li>
+                <li style="margin-right: 10px;">
+                    <button type="button" id="changeMiningBtnId" class="btn btn-default" data-ng-click="changeMining()">{{miningText}}</button>
+                </li>
+                <li><span class="label" style="color: black; font-size: 14px;"><b>Ether Balance : {{etherBalance}}</b></span>
+				</li> -->
+                <li class="dropdown">
+                    <a style="color: black;" class="dropdown-toggle" data-toggle="dropdown" href=""> <i class="fa fa-user fa-fw"></i> {{UserData.username}} ({{UserData.Role}}) <i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="">Role:{{UserData.Role}}</a></li>
+                        <li title="{{UserData.address}}" id="addressid">
+							<a href="" class="copybtn" onclick="select_element_contents()"><i class="glyphicon glyphicon-file" style="font-size: 12px;"></i>
+								<span id="tag_text"> Address :{{UserData.address}}</span>
+							</a>
+						</li>
+                        <li class="divider"></li>
+                        <li><a href="" data-ng-click="logout()">Logout</a></li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+        </nav>
+        <button style="display: none" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#pageProgressBar" id="progressBtn"></button>
+        <div class="navbar-default sidebar" style="margin-top: 0px; height: 100%; background: #fff;">
+            <div class="sidebar-nav " style="margin-top: 0px; height: 80%; background: #fff;">
+                <!--<ul class="nav" id="side-menu2">
+                    <li class="sidebar-search" style="color:#000;">{{'SearchContract' | i18next}}
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="{{'SearchContract' | i18next}}"> <span class="input-group-btn">
+								<button class="btn btn-default" style="font-weight: normal; font-size: 14px;" type="button" id="button_1" data-ng-click="search()" title="{{'SearchContract' | i18next}}">
+									<i class="fa fa-search" style="font-size: 12px;"></i>
+								</button>
+							</span>
+                        </div>
+                        
+                    </li>
+                </ul>-->
+                <ul class="nav">
+                    <li style="border-bottom: 1px solid black; color:#000;"><span style="text-align: center; margin-left: 30px;"><b>{{'AvailableContracts'| i18next}}</b></span></li>
+                </ul>
+                <div class="scroller" style="height:200px;overflow-y:auto">
+                    <ul class="nav" id="side-menu">
+                        <li data-ng-repeat="obj in availablecontracts"><a style="color:black;" class="catss"  href="" data-ng-click="getcontractData(obj.contractAddress)">{{obj.contractNumber}} </a> 
+						<span class="bg-brown50 fg-white label label-default">{{obj.version}}</span>
+                        </li>
+                    </ul>
+                </div>
+				<ul class="nav">
+                    <li style="border-bottom: 1px solid black; color:#000;"><span style="text-align: center; margin-left: 30px;"><b>{{'CompletedContracts'|
+								i18next}}</b></span></li>
+                </ul>
+                <div class="scroller" style="height:300px;overflow-y:auto;">
+                    <input type='text' placeholder="Search" class="form-control" style="width:90%; margin-left:5%;margin-top: 4px;
+                    margin-bottom: 4px;" id='txtList' onkeyup="filter(this)" />
+                    <ul class="nav" id="side-menu2" class="fromList" style="border-top:1px solid black;margin-top:2px;">
+                        <li data-ng-repeat="obj in completedcontracts" ng-class="{selected: obj.idSelected}" >
+                            <a href="" class="catss" id="compcont"  data-ng-click="getcontractData(obj.contractAddress)" style="color:black;" >{{obj.contractNumber}} </a> 
+                            <span class="bg-brown50 fg-white label label-default">{{obj.version}}</span>
+						</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div style="margin-top: 0px; height: 20%; background: #1F4E79;">
+				<h5 style="margin-top: 0px; margin-left: 20px; color: #FFF;">Developed By - Project <img src="images/adam.png" alt="Adam" class="" style="margin-top: 0px;"></h5>
+			</div> -->
+        </div>
+        <!--  </nav> -->
+        <div id="page-wrapper" style="">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default" style="margin-top: 25px;">
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                            <b>{{'TaskToPerform' | i18next}} <span ng-if="TaskPerformCount" class="bg-brown50 fg-white label label-default">{{TaskPerformCount}}</span><i class="fa fa-chevron-down" style="float: right;" aria-hidden="true"></i></b>
+										</a>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body" style="height: 200px;">
+                                            <table class="table nobottommargintable table-condensed" style="width: 98%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="">{{'ContractNumber' | i18next}}</th>
+                                                        <th class="">{{'ContractInformation' | i18next}}</th>
+                                                        <th class="">{{'Action' | i18next}}</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <div class="div-table-contentsmall">
+                                                <table class="table table-condensed">
+
+                                                    <tr data-ng-repeat="task in supplierTaskPerformData.val" style="font-size: 13px">
+                                                        <td class="" style="font-size: 13px;">{{task.ContractName}}</td>
+                                                        <td class="" style="font-size: 13px;">
+															<a href="" data-ng-click="getContractInformation(task)" data-toggle="modal" title="{{'ContractInformation' | i18next}}" data-target="#taskStatusDetailsModal">
+																<i class="glyphicon glyphicon-th-list" style="font-size: 12px;"></i>
+															</a>
+														</td>
+                                                        <td class="size" style="font-size: 13px; margin-left: -20px;">
+                                                            <button type="button" class="btn btn-default" data-ng-show="task.showAssignBtn" data-ng-disabled="task.issigned" data-toggle="modal" data-target="#taskPerformModal" data-backdrop="static" data-keyboard="false" data-ng-click="getContractInformation(task)">Assign</button>
+                                                            <button type="button" class="btn btn-default" data-ng-click="getContractInformation(task)" data-ng-hide="task.showAssignBtn" data-ng-disabled="task.disbaleReview" data-toggle="modal" data-target="#taskStatusModal" data-backdrop="static" data-keyboard="false">Review</button>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="spinner" id="taskProgress" data-ng-if="taskToPerformProgressBar" style="font-size: 0.4cm; margin-left: 320px; margin-top: -100px; display: block">
+                                                <div class="rect1"></div>
+                                                <div class="rect2"></div>
+                                                <div class="rect3"></div>
+                                                <div class="rect4"></div>
+                                                <div class="rect5"></div>
+                                                <br>{{'Pleasewait' | i18next}}.....
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.panel-body -->
+                                </div>
+                                <div class="panel panel-default" >
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                            <b>{{'LastActions' | i18next}} <i
+											class="fa fa-chevron-down" style="float: right;"
+											aria-hidden="true"></i></b></a>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                        <div class="panel-body" style="height: 200px;">
+                                            <table class="table nobottommargintable table-condensed" style="width: 98%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="">{{'ContractNumber' | i18next}}</th>
+                                                        <th class="">{{'ContractInformation' | i18next}}</th>
+                                                        <th class="">{{'Date' | i18next}}</th>
+                                                        <th class="">{{'LastAction' | i18next}}</th>
+                                                        <th class="">{{'Remark' | i18next}}</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <div class="div-table-contentsmall">
+                                                <table class="table table-condensed">
+                                                    <tr data-ng-repeat="task in supplierStatusSummary.val">
+                                                        <td class="" style="font-size: 13px;">{{task.ContractName}}</td>
+                                                        <td class="" style="font-size: 13px;">
+															<a href="" data-ng-click="getContractInformation(task)" data-toggle="modal" title="{{'ContractInformation' | i18next}}" data-target="#taskStatusDetailsModal" data-backdrop="static" data-keyboard="false">
+																<i class="glyphicon glyphicon-th-list" style="font-size: 12px;"></i>
+															</a>
+														</td>
+                                                        <td class="" style="font-size: 13px;" title="{{task.DateCreated}}"><span am-time-ago="task.DateCreated"></span></td>
+                                                        <td class="" style="font-size: 13px;">{{task.status}}</td>
+                                                        <td class="" style="font-size: 13px;">{{task.remark}}
+                                                            <br> <a href="" data-ng-if="task.wholeRemark" data-trigger="hover" data-toggle="popover" data-html="true" data-placement="bottom" data-content="{{task.wholeRemark}}">Read More</a>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="spinner" id="LastActionsLoader" data-ng-if="statusSummaryProgressBar" style="font-size: 0.4cm; margin-left: 320px; margin-top: -100px; display: block">
+                                                <div class="rect1"></div>
+                                                <div class="rect2"></div>
+                                                <div class="rect3"></div>
+                                                <div class="rect4"></div>
+                                                <div class="rect5"></div>
+                                                <br>{{'Pleasewait' | i18next}}.....
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.panel-body -->
+                                </div>
+                                <div class="panel panel-default">
+                                    <!-- /.panel-body -->
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                            <b>{{'History' | i18next}} <i class="fa fa-chevron-down" id="foo" style="float: right;" aria-hidden="true"></i></b></a>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body" style="height: 400px;">
+                                            <table class="table table-condensed nobottommargintable table1" style="width: 98%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="">{{'ContractNumber' | i18next}}</th>
+                                                        <th class="">{{'ContractInformation' | i18next}}</th>
+                                                        <th class="">{{'Owner' | i18next}}</th>
+                                                        <th class="">{{'Date' | i18next}}</th>
+                                                        <th class="">{{'Status' | i18next}}</th>
+                                                        <th class="">{{'Remark' | i18next}}</th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                            <div class="div-table-content">
+                                                <table class="table table-condensed table2">
+                                                    <tbody>
+                                                        <tr data-ng-repeat="task in supplierTaskStatusData.val">
+                                                            <td class="" style="font-size: 13px;">{{task.ContractName}}</td>
+                                                            <td class="" style="font-size: 13px;">
+																<a href="" data-ng-click="getContractInformation(task)" data-toggle="modal" data-backdrop="static" data-keyboard="false" title="{{'ContractInformation' | i18next}}" data-target="#taskStatusDetailsModal">
+																	<i class="glyphicon glyphicon-th-list" style="font-size: 12px;"></i>
+																</a>
+															</td>
+                                                            <td class="" style="font-size: 13px;">{{task.owner}}</td>
+                                                            <td class="" style="font-size: 13px;" title="{{task.DateCreated}}"><span am-time-ago="task.DateCreated"></span></td>
+                                                            <td class="" style="font-size: 13px;">{{task.status}}</td>
+                                                            <td class="" style="font-size: 13px;">{{task.remark}}
+                                                                <br> <a href="" data-ng-if="task.wholeRemark" data-popover data-trigger="hover" data-toggle="popover" data-html="true" data-placement="bottom" data-content="{{task.wholeRemark}}">Read More</a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="spinner" id="HistoryLoader" data-ng-if="taskStatusProgressBar" style="font-size: 0.4cm; margin-left: 320px; margin-top: -200px; display: block">
+                                                <div class="rect1"></div>
+                                                <div class="rect2"></div>
+                                                <div class="rect3"></div>
+                                                <div class="rect4"></div>
+                                                <div class="rect5"></div>
+                                                <br>{{'Pleasewait' | i18next}}.....
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+								<div class="panel panel-default" >
+                                    <!-- /.panel-heading -->
+                                    <div class="panel-heading">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+											<b>{{'panelcharts' | i18next}} <i class="fa fa-chevron-down" style="float: right;" aria-hidden="true"></i></b>
+										</a>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse">
+                                        <div class="panel-body" >
+                                                <div class="row" style="height:500px;margin-left:50px;margin-top:50px;">
+												<div class="col-md-8" style="height:500px">
+													<canvas id="bar" class="chart chart-bar" chart-colors = "colours"
+														chart-data="data" chart-labels="labels" chart-options="chartOptions" chart-series="series">
+													</canvas>
+													<div class="spinner" id="LastActionsLoader" data-ng-if="taskStatusProgressBar" style="font-size: 0.4cm; margin-left: 280px; margin-top: -150px; display: block">
+														<div class="rect1"></div>
+														<div class="rect2"></div>
+														<div class="rect3"></div>
+														<div class="rect4"></div>
+														<div class="rect5"></div>
+														<br>{{'Pleasewait' | i18next}}.....
+													</div>
+												</div>
+												<div class="col-md-4">
+													<p ng-show="mainaccount_details"><span style="color:#1e8449"class="glyphicon glyphicon-stop"></span>{{mainaccount_details}}</p>
+													<br>
+													<p ng-show="supplier_details"><span style="color:#f39c12"class="glyphicon glyphicon-stop"></span>{{supplier_details}}</p>
+													<br>
+												</div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.panel-body -->
+                                </div>
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.col-lg-8 -->
+                        <div class="col-lg-3">
+                            <div class="panel panel-default" style="height: 530px; margin-top: 25px;">
+                                <div class="panel-heading">
+                                    <b>{{'Instructions' | i18next}} </b>
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <table>
+                                        <tbody>
+											<tr class="nav" id="side-menu1" style="border-bottom: 1px solid ;border-color: #d9e0e7;margin-top:5px;" ng-repeat="obj in 'supplieraccountinstructions' | i18next">
+												<td  style="text-align:left;vertical-align: top;padding:2px;">{{$index+1}}.<td>
+												<td style="text-align:left;padding:2px;">{{obj}}<td>
+											</tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+	<!-- Assign Task Modal open on Assign Button -->
+    <div class="modal fade" id="taskPerformModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div style="width: 330px" class="modal-dialog" role="document">
+            <div class="spinner" id="taskPerformModify" data-ng-show="taskPerformAssignProgress" style="font-size: 0.4cm; margin-top: 320px">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+                <br>{{'Pleasewait' | i18next}}.....
+            </div>
+            <div class="modal-content" data-ng-hide="taskPerformAssignProgress">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"  style = "font-weight: bold;" id="myModalLabel">{{'AssignTask' | i18next}}</h4>
+                </div>
+                <div class="modal-body" id="myModal_body">
+                    <table class="table" style="width: 250px; margin-left: 20px">
+                        <thead>
+                            <th style="text-align: center;">{{'User' | i18next}}</th>
+                            <th style="text-align: center;">{{'Action' | i18next}}</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <select data-ng-model="myselect1" class="form control" style="height: 30px" data-ng-init="0" data-ng-options="a as a for a in supplierAssignTo">
+                                        <option style="display: none;" selected disabled value="">{{myselect1}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | i18next}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- modal open on task perform  -->
+    <div class="modal fade" id="taskStatusModal" tabindex="-1" role="dialog" aria-labelledby="taskStatusModalLabel">
+        <div style="width: 760px" class="modal-dialog" role="document">
+            <div class="spinner" id="taskStatusModal_id" data-ng-show="taskPerformInfoProgress" style="font-size: 0.4cm; margin-top: 320px;">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+                <br>{{'Pleasewait' | i18next}}.....
+            </div>
+            <div class="modal-content" data-ng-hide="taskPerformInfoProgress">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title"  style = "font-weight: bold;"  id="taskStatusModalLabel">{{'ContractInformation'| i18next}}</h4>
+                </div>
+                <div class="modal-body" id="taskStatusModal_info" style="height: 450px; overflow-y: auto;">
+                    <table class="table table-condensed table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractNumber' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractNumber}}</td>
+								<td></td>
+                                <td></td>
+							</tr>
+                            <tr>
+                                <td class="tdrightalign">{{'NumberofParts' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.numberofParts}}</td>
+								<td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractDescription' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractDescription}}</td>
+								<td></td>
+                                <td></td>
+							</tr>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractAmount' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractamount}}
+                                    <b>USD</b>
+                                </td>
+								<td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractOwnedBy' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractOwnedby}}</td>
+								<td></td>
+                                <td></td>
+							</tr>
+                            <tr>
+                                <td class="tdrightalign">{{'DueDate' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractduedate}}</td>
+								<td></td>
+                                <td></td>
+                            </tr>
+							<tr>
+                                <td class="tdrightalign">{{'File' | i18next}}:</td>
+                                <td class="tdleftalign"><a href="{{supplierTaskStatusDetails.val.filehashkey}}" target="_blank" class="btn btn-default"> {{'View'| i18next}}</a></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr style="background-color: #000000; width: 100%; height: 1px">
+                    <div class="panel-group" id="Taskperform_accordion_tasklist1" >
+                            <div class="panel panel-default">
+                                <!-- /.panel-heading -->
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#Taskperform_accordion_tasklist1" href="#TaskPerform_collapse_tasklist1">
+										<b>{{'TaskList' | i18next}} : <i class="fa fa-chevron-down"style="float: right;" aria-hidden="true"></i></b>
+									</a>
+                                </div>
+                                <div id="TaskPerform_collapse_tasklist1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                       <table style="margin-left: 20px;">
+											<tr data-ng-repeat="obj in supplierTaskStatusDetails.val.partInfo">
+												<td style="text-align: left;">{{$index + 1}} : {{obj}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <hr style="background-color: #000000; width: 100%; height: 1px">
+                    <div class="panel-group" id="Review_accordion">
+                        <div class="panel panel-default">
+                            <!-- /.panel-heading -->
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#Review_accordion" href="#Review_collapse">
+                                    <b>{{'Comments' | i18next}}: <i class="fa fa-chevron-down" style="float: right;" aria-hidden="true"></i></b></a>
+                            </div>
+                            <div id="Review_collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <section class="comments">
+                                        <article class="comment" data-ng-repeat="obj in supplierTaskStatusDetails.val.comments">
+                                            <div class="comment-body">
+                                                <div class="text"><p>{{obj.comment}}</p></div>
+                                                <p class="attribution">by <a href="">{{obj.userAddress}}</a> {{obj.date}}</p>
+                                            </div>
+                                        </article>
+                                    </section>
+                                    <textarea data-ng-disabled="disableComment" data-ng-show="showcommenttext" placeholder="{{'Writeacomment' | i18next}}" id="partInfoComment_text" style="width: 350px; margin-left: 92px; resize: none" data-ng-model="partInfoComment" data-ng-class="{red: !partInfoComment}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-ng-disabled="disableAction" class="btn btn-default" data-ng-model="accept" data-ng-click="contractDecision('Accepted',supplierTaskStatusDetails.val.contractAddress)">{{'Accept' | i18next}}</button>
+                    <button type="button" data-ng-disabled="disableAction" class="btn btn-default" data-ng-model="reject" data-ng-click="contractDecision('Rejected',supplierTaskStatusDetails.val.contractAddress)">{{'Reject' | i18next}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | i18next}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contract Information Modal open on Last action -->
+    <div class="modal fade" id="taskStatusDetailsModal" tabindex="-1" role="dialog" aria-labelledby="taskStatusDetailsModalLabel">
+        <div style="width: 760px" class="modal-dialog" role="document">
+            <div class="spinner" id="taskPerformInfoProgId" data-ng-show="taskPerformInfoProgress" style="font-size: 0.4cm; margin-top: 350px;">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+                <br>{{'Pleasewait' | i18next}}.....
+            </div>
+            <div class="modal-content" data-ng-hide="taskPerformInfoProgress">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" style = "font-weight: bold;"  id="taskStatusDetailsModalLabel">{{'ContractInformation'| i18next}}</h4>
+                </div>
+                <div class="modal-body" id="modal_part_info" style="height: 450px; overflow-y: auto;">
+                    <table class="table table-condensed table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractNumber' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractNumber}}</td>
+								<td></td>
+                                <td></td>
+							</tr>
+                            <tr>
+                                <td class="tdrightalign">{{'NumberofParts' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.numberofParts}}</td>
+								<td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractDescription' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractDescription}}</td>
+								<td></td>
+                                <td></td>
+							</tr>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractAmount' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractamount}}
+                                    <b>USD</b>
+                                </td>
+								<td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="tdrightalign">{{'ContractOwnedBy' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractOwnedby}}</td>
+								<td></td>
+                                <td></td>
+							</tr>
+                            <tr>
+                                <td class="tdrightalign">{{'DueDate' | i18next}}:</td>
+                                <td class="tdleftalign">{{supplierTaskStatusDetails.val.contractduedate}}</td>
+								<td></td>
+                                <td></td>
+                            </tr>
+							<tr>
+                                <td class="tdrightalign">{{'File' | i18next}}:</td>
+                                <td class="tdleftalign"><a href="{{supplierTaskStatusDetails.val.filehashkey}}" target="_blank" class="btn btn-default"> {{'View'| i18next}}</a></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr style="background-color: #000000; width: 100%; height: 1px">
+                    <div class="panel-group" id="Taskperform_accordion_tasklist2" >
+                            <div class="panel panel-default">
+                                <!-- /.panel-heading -->
+                                <div class="panel-heading">
+                                    <a data-toggle="collapse" data-parent="#Taskperform_accordion_tasklist2" href="#TaskPerform_collapse_tasklist2">
+										<b>{{'TaskList' | i18next}} : <i class="fa fa-chevron-down"style="float: right;" aria-hidden="true"></i></b>
+									</a>
+                                </div>
+                                <div id="TaskPerform_collapse_tasklist2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                       <table style="margin-left: 20px;">
+											<tr data-ng-repeat="obj in supplierTaskStatusDetails.val.partInfo">
+												<td style="text-align: left;">{{$index + 1}} : {{obj}}</td>
+											</tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <hr style="background-color: #000000; width: 100%; height: 1px">
+                    <div class="panel-group" id="contractInfo_accordion">
+                        <div class="panel panel-default">
+                            <!-- /.panel-heading -->
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" data-parent="#contractInfo_accordion" href="#contractInfo_collapse">
+                                    <b>{{'Comments' | i18next}}: <i class="fa fa-chevron-down" style="float: right;" aria-hidden="true"></i></b>
+								</a>
+                            </div>
+                            <div id="contractInfo_collapse" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <section class="comments">
+                                        <article class="comment" data-ng-repeat="obj in supplierTaskStatusDetails.val.comments">
+                                            <div class="comment-body">
+                                                <div class="text"><p>{{obj.comment}}</p></div>
+                                                <p class="attribution">{{'by' | i18next}} <a href="">{{obj.userAddress}}</a> {{obj.date}}</p>
+                                            </div>
+                                        </article>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | i18next}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="userprofileModal" tabindex="-1" role="dialog" aria-labelledby="userprofileModalLabel">
+        <div style="width: 760px" class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" style = "font-weight: bold;"  id="userprofileModalLabel">{{'Userprofile' |i18next}}</h4>
+                </div>
+                <div class="modal-body" id="userprofileModal_info">
+                    <table class="table" style="white-space: nowrap; overflow: auto">
+                        <tr>
+                            <td class="inputTextLableFont"><b>Tool-tips</b> </td>
+                            <td>
+                                <input type="radio" name="b1" id="b1" checked data-ng-model="tooltipOnOffVal" onclick="tooltipOnOff(0)" value="0" style="margin-left: 8px" />
+                            </td>
+                            <td><span style="margin-left: 0px" class="inputTextLableFont">&nbsp;on &nbsp;</span></td>
+                            <td>
+                                <input type="radio" name="b1" id="b2" data-ng-model="tooltipOnOffVal" onclick="tooltipOnOff(1)" value="1" style="margin-left: 15px" />
+                            </td>
+                            <td class="inputTextLableFont">&nbsp;off</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="PeersModal" tabindex="-1" role="dialog" aria-labelledby="PeersModalLabel">
+        <div style="width: 590px;" class="modal-dialog" role="document">
+            <div class="spinner" id="taskPerform" data-ng-show="PeersModalProgress" style="font-size: 0.4cm; margin-top: 320px;">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+                <br>{{'Pleasewait' | i18next}}.....
+            </div>
+            <div class="modal-content" data-ng-hide="taskPerformcontractinfoProgress">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" style = "font-weight: bold;"  id="PeersModalLabel">{{'PeersInformation' | i18next}}</h4>
+                </div>
+                <div class="modal-body" id="PeersModal_body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>{{'Node' | i18next}} :</label>
+                            <input id="Peers" class="form-control" style="resize: none" data-ng-model="NodeInfo" readonly="readonly" />
+                        </div>
+                    </div>
+                    <hr style="background-color: #000000; width: 100%; height: 1px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>{{'AddPeers' | i18next}} :</label>
+                            <input type="text" class="form-control" name="AddPeer" data-ng-model="PeerInfo" id="PeerInfo" placeholder="{{'AddPeers' | i18next}}" />
+                        </div>
+                    </div>
+                    <br>
+                </div>
+                <button style="margin-left: 190px; display: none;" type="button" class="btn btn-default" data-ng-click="addPeers()">{{'Save' | i18next}}
+                </button>
+                <button type="button" style="margin-left: 190px; display: none;" class="btn btn-default" data-dismiss="modal">{{'Close' | i18next}}
+                </button>
+                <div class="modal-footer">
+                    <!-- <button data-ng-show="showcomment" type="button"  class="btn btn-default" data-ng-click="addcommentsfromTaskPerform(contractInfo.contractAddress,taskperformcomment)"  data-ng-disabled="!taskperformcomment">{{'Save' | i18next}}</button> -->
+                    <button style="margin-left: 190px;" type="button" class="btn btn-default" data-ng-click="addPeers()">{{'Save' | i18next}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{'Close' | i18next}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
